@@ -8,5 +8,10 @@
     </head>
     <body>
         <!-- @todo currencies here -->
+        <ul>
+            @foreach ($currencies as $currency)
+                <li>{{ $currency['currency'] }} {{ $currency['code'] }} {{ $currency['mid'] }}</li>
+            @endforeach        
+        </ul>
     </body>
 </html>
