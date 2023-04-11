@@ -22,8 +22,10 @@ class CurrenciesController extends Controller {
     private function integrateFromNBP() {
         try {
             $response = Http::get('https://api.nbp.pl/api/exchangerates/tables/a?format=json');
+            echo "API integration's status: " . $response->status();
         } catch (ConnectionException $e) {
             echo $e->getMessage();
+
             return;
         }
 
