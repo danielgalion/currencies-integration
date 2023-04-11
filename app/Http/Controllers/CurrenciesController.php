@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Currency;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class CurrenciesController extends Controller {
@@ -11,8 +13,9 @@ class CurrenciesController extends Controller {
     
     public function index() {
         $this->integrateFromNBP();
+        $this->updateDB();
 
-        return view('currencies', ['currencies' => $this->currencies ?? array()]);
+        return view('currencies', ['currencies' => $this->getCurrencies()]);
     }
 
     private function integrateFromNBP() {
@@ -21,5 +24,18 @@ class CurrenciesController extends Controller {
         $json = $response->json();
 
         $this->currencies = $json[0]['rates'];
+    }
+
+    private function updateDB() {
+        foreach($this->currencies ?? array() as $currency) {
+            DB::table('currencies')->updateOrInsert(
+                ['name' => $currency['currency'], 'currency_code' => $currency['code']],
+                ['exchange_rate' => $currency['mid']]
+            );
+        }
+    }
+
+    private function getCurrencies() {
+        return Currency::all();
     }
 }

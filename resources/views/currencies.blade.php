@@ -7,10 +7,9 @@
         <title>Currencies</title>
     </head>
     <body>
-        <!-- @todo currencies here -->
         <ul>
             @foreach ($currencies as $currency)
-                <li>{{ $currency['currency'] }} {{ $currency['code'] }} {{ $currency['mid'] }}</li>
+                <li>{{ $currency['name'] }} {{ $currency['currency_code'] }} {{ $currency['exchange_rate'] }}</li>
             @endforeach        
         </ul>
     </body>
