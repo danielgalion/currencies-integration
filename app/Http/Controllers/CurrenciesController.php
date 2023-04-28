@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Currency;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class CurrenciesController extends Controller {
@@ -36,7 +35,7 @@ class CurrenciesController extends Controller {
 
     private function updateDB() {
         foreach($this->currencies ?? array() as $currency) {
-            DB::table('currencies')->updateOrInsert(
+            Currency::updateOrCreate(
                 ['name' => $currency['currency'], 'currency_code' => $currency['code']],
                 ['exchange_rate' => $currency['mid']]
             );
