@@ -1,3 +1,9 @@
+## Opis
+Mała, przykładowa aplikacja do pobierania z Narodowego Banku Polskiego kursów walut i wyświetlania ich. 
+
+## Description
+Fetch data about exchange rates compared to zloty (PLN) from NBP (The Polish National Bank). View them in UI.
+
 ## Do uruchomienia
 
 - pobierz kod z repozytorium
